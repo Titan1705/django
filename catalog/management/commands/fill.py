@@ -7,20 +7,20 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_categories():
-    # Получаем данные из фикстуры с категориями
+        # Получаем данные из фикстуры с категориями
         with open('category.json', encoding='utf-8') as file:
             return json.load(file)
 
     @staticmethod
     def json_read_products():
-    # Получаем данные из фикстуры с продуктами
+        # Получаем данные из фикстуры с продуктами
         with open('product.json', encoding='utf-8') as file:
             return json.load(file)
 
     def handle(self, *args, **options):
 
-        Category.objects.all().delete() # Удаляем все категории
-        Product.objects.all().delete() # Удаляем все продукты
+        Category.objects.all().delete()  # Удаляем все категории
+        Product.objects.all().delete()  # Удаляем все продукты
 
         # Создаем списки для хранения объектов
         category_list = []
@@ -32,7 +32,7 @@ class Command(BaseCommand):
                     "name": category['fields']['name'],
                     "description": category['fields']['description']
                 }
-                )
+            )
 
         category_for_create = []
         for category_item in category_list:
@@ -55,7 +55,7 @@ class Command(BaseCommand):
                     "updated_at": product['fields']['updated_at']
 
                 }
-                )
+            )
 
         product_for_create = []
         for product_item in product_list:
