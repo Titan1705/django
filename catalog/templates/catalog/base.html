@@ -180,26 +180,24 @@
     {% include 'catalog/includes/inc_menu.html' %}
 </header>
 
-
 <main>
-
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Магазин</h1>
                 <p class="lead text-body-secondary">Лучшие товары</p>
                 <p>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить продукт</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить
+                        продукт</a>
                 </p>
             </div>
         </div>
     </section>
-    <div class="album py-5 bg-body-tertiary">
-        {% block content %}
-        {% endblock %}
-    </div>
-    >
 </main>
+{% block content %}
+
+{% endblock %}
+
 
 <footer class="text-body-secondary py-5">
     <div class="container">
