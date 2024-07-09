@@ -6,13 +6,20 @@
 </div>
 <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in object_list %}
+        {% for product in product_list %}
         <div class="col">
             <div class="card shadow-sm">
                 <img src="{{ product.photo | media_filter }}">
                 <div class="card-body">
                     <p class="card-text">Название: {{ product.name }}</p>
                     <p class="card-text">Описание: {{ product.description | truncatechars:100 }}</p>
+                    {% for version in product.version_product.all %}
+                    {% if version.is_current %}
+                    <div class="card">Версия: {{ version.number_version }} / {{ version.name_version }}</div>
+                    {% endif %}
+                    {% endfor %}
+                    {{ product.active_version.version_number }}
+                    <div class="card">Версия: {{ version.number_version }} /{{ product.name }} {{ version.name_version }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}"
@@ -23,9 +30,21 @@
                                role="button">Удалить</a>
                         </div>
                     </div>
+                    {% if version.is_current %}
+                    <div class="card-footer">
+                        {{ product.name }}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
+        {% for version in version_product %}
+        {% if version.is_current.all %}
+        <div class="card-footer">
+            Версия: {{ version.number_version }} / {{ version.name_version }}
+        </div>
+        {% endif %}
+        {% endfor %}
         {% endfor %}
     </div>
 </div>
