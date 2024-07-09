@@ -10,6 +10,12 @@ from catalog.models import Product, Version
 class ProductListView(ListView):
     model = Product
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for product in context["product_list"]:
+            product.active_version = product.versions.filter(is_current=True).first()
+        return context
+
 
 class ProductDetailView(DetailView):
     model = Product
