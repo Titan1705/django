@@ -2,6 +2,17 @@
 {% load my_tags %}
 {% block content %}
 
+
+<main>
+    <section class="py-5 text-center container">
+                <h1 class="fw-light">Магазин</h1>
+                <p class="lead text-body-secondary">Лучшие товары</p>
+                <p>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить
+                        продукт</a>
+                </p>
+    </section>
+</main>
 <div class="album py-5 bg-body-tertiary">
 </div>
 <div class="container">
