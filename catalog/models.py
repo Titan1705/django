@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class Product(models.Model):
@@ -36,7 +40,8 @@ class Product(models.Model):
         default=0,
     )
     # manufactured_at = models.DateTimeField(auto_now=True, verbose_name="Дата производства продукта")
-
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products", blank=True,
+        null=True,)
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
