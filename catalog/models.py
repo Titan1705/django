@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class Product(models.Model):
@@ -36,11 +40,18 @@ class Product(models.Model):
         default=0,
     )
     # manufactured_at = models.DateTimeField(auto_now=True, verbose_name="Дата производства продукта")
-
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products", blank=True,
+        null=True,)
+    is_published = models.BooleanField(default=False, verbose_name='Опубликован')
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "price"]
+        permissions = [
+            ("can_unpublish_product", 'Can unpublish product'),
+            ("can_change_product_description", "Can change product description"),
+            ("can_change_product_category", "Can change product category"),
+        ]
 
     def __str__(self):
         return f"{self.name}, {self.description}, {self.price}"
